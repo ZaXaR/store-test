@@ -8,4 +8,4 @@ import { ProductItemComponent } from './components/product-item/product-item.com
     CommonModule
   ]
 })
-export class SharedModuleModule { }
+export class SharedComponentModule { }

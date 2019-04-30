@@ -1,1 +1,33 @@
-<p>test</p>
+<div class="product-table" *ngIf="productItems$">
+  <ul *ngFor="let item of productItems$.value">
+    <li class="item">
+      <h3 class="h4">{{ item.name }}</h3>
+      <span>amount: {{ item.amount }}</span>
+      <p>price: {{ item.price }}</p>
+      <div class="input-amount">
+        <input
+          type="button"
+          value="-"
+          (click)="minusItem(item.id)"
+        >
+        <input
+          #amount
+          type="number"
+          [disabled]="item.amount === 0"
+          [defaultValue]="1"
+          (change)="checkAmountItem(item.id)"
+        >
+        <input
+          type="button"
+          value="+"
+          (click)="plusItem(item.id)"
+        >
+      </div>
+      <input
+        type="button"
+        (click)="buyItem(item.id, amount.value)"
+        value="buy"
+      >
+    </li>
+  </ul>
+</div>
