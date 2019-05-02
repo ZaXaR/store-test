@@ -8,19 +8,24 @@
         <input
           type="button"
           value="-"
-          (click)="minusItem(item.id)"
+          (click)="amount.value = amount.valueAsNumber - 1"
         >
         <input
           #amount
           type="number"
+          [ngStyle]="
+          amount.valueAsNumber <= -1 ? {'border-color': 'red'}
+          : amount.valueAsNumber >= 0 ?  {'border-color': 'blue'}
+          : {'border-color': 'blue'}"
           [disabled]="item.amount === 0"
-          [defaultValue]="1"
-          (change)="checkAmountItem(item.id)"
+          [value]=1
+          (change)="checkAmountItem(item.id, $event.target)"
         >
+        {{amount.value}}
         <input
           type="button"
           value="+"
-          (click)="plusItem(item.id)"
+          (click)='amount.value = amount.valueAsNumber + 1'
         >
       </div>
       <input

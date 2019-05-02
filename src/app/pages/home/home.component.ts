@@ -25,19 +25,12 @@ export class HomeComponent implements OnInit {
     this.apiService.getProductItem().pipe(
       filter(data => data !== undefined),
       filter(data => data !== null),
-  ).subscribe((data:ProductItemResponce) => {
+  ).subscribe((data: ProductItemResponce ) => {
       this.productItems$.next(data.items);
     });
   }
 
-  minusItem(id: number) {
-    
-  }
-
-  plusItem(id: number) {
-    
-  }
-
+// there we cant gat id and amount
   checkAmountItem(id: number) {
   }
 
