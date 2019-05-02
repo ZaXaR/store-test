@@ -1,8 +1,8 @@
 import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import { ApiStubService } from '../../core/services/api/api-stub.service';
-import { BehaviorSubject } from 'rxjs';
+import {BehaviorSubject, of, timer} from 'rxjs';
 import {ProductItemResponce, ProductItems} from '../../core/services/api/api-service.interface';
-import { filter } from 'rxjs/operators';
+import {delay, filter, skip, tap} from 'rxjs/operators';
 
 @Component({
   selector: 'app-home',
@@ -10,14 +10,20 @@ import { filter } from 'rxjs/operators';
   styleUrls: ['./home.component.css']
 })
 
-
 export class HomeComponent implements OnInit {
   productItems$: BehaviorSubject<ProductItems[]> = new BehaviorSubject(null);
-
+  qwe1 = 1;
+  qwe2 = 10;
+  qwe1Bool = false;
+  qwe1Boo2 = false;
+  sub: any;
+  backdata = {
+    qwe1: this.qwe1,
+    qwe2: this.qwe2,
+  };
 
   constructor(
-    private apiService: ApiStubService,
-    private cd: ChangeDetectorRef
+    private apiService: ApiStubService
   ) {
   }
 
@@ -29,6 +35,46 @@ export class HomeComponent implements OnInit {
       this.productItems$.next(data.items);
     });
   }
+
+
+
+//   quick way to govnokod
+plusData() {
+  const source = timer(1000, 1000);
+  this.sub = source.subscribe(data => {
+    if (!this.qwe1Bool) {
+      this.qwe1--;
+    } else {
+      this.qwe1++;
+    }
+    if (!this.qwe1Boo2) {
+      this.qwe2--;
+    } else {
+      this.qwe2++;
+    }
+    if (this.qwe1 === -5) {
+      this.qwe1Bool = true;
+    } else if (this.qwe1 === 10) {
+      this.qwe1Bool = false;
+    }
+    if (this.qwe2 === -5) {
+      this.qwe1Boo2 = true;
+    } else if (this.qwe2 === 10) {
+      this.qwe1Boo2 = false;
+    }
+  });
+}
+
+  stopData() {
+    this.sub.unsubscribe();
+  }
+
+  resetData() {
+    this.qwe1 = this.backdata.qwe1;
+    this.qwe2 = this.backdata.qwe2;
+  }
+// end govnokod
+
 
 // there we cant gat id and amount
   checkAmountItem(id: number) {
