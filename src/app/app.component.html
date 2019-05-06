@@ -1,4 +1,5 @@
 <div class="counter">
+  <h1>{{ title }}</h1>
   <input
     [ngStyle]="(total$ | async).first <= -1 ? {'border-color': 'red'} : {'border-color': 'blue'}"
     [value]="(total$ | async).first"

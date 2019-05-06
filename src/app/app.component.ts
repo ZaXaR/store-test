@@ -11,6 +11,7 @@ import {Observable, timer} from 'rxjs';
 
 
 export class AppComponent {
+  title = 'Test-Store';
   total$: Observable<number>;
   timerA = timer(1000, 1000);
   subscribeTimer: any;
