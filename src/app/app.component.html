@@ -1,1 +1,14 @@
-<router-outlet></router-outlet>
+<div class="counter">
+  <input
+    [ngStyle]="(total$ | async).first <= -1 ? {'border-color': 'red'} : {'border-color': 'blue'}"
+    [value]="(total$ | async).first"
+  >
+  <input
+    [ngStyle]="(total$ | async).second <= -1 ? {'border-color': 'red'} : {'border-color': 'blue'}"
+    [value]="(total$ | async).second"
+  >
+  <button (click)="start()">start</button>
+  <button (click)="stop()">stop</button>
+  <button (click)="reset()">reset</button>
+</div>
+
